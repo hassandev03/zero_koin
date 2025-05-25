@@ -11,7 +11,7 @@ class BuyScreen extends StatefulWidget {
 
 class _BuyScreenState extends State<BuyScreen> {
   // List of trading cards data
-  final List<TradingCard> tradingCards = [
+  final List tradingCards = [
     TradingCard(
       platformName: 'PancakeSwap',
       platformIcon: '🥞',
@@ -42,6 +42,27 @@ class _BuyScreenState extends State<BuyScreen> {
       isLaunchingSoon: true,
       iconColor: const Color(0xFF1FC7D4),
     ),
+    Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.2),
+          width: 1,
+        ),
+      ),
+      child: Text(
+        "NEW EXCHANGE SOON",
+        style: TextStyle().copyWith(
+          color: Colors.white.withValues(alpha: 0.8),
+          fontSize: 20,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ),
   ];
 
   @override
@@ -63,7 +84,10 @@ class _BuyScreenState extends State<BuyScreen> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 12.0,
+            ),
             child: Column(
               children: [
                 Row(
@@ -92,6 +116,9 @@ class _BuyScreenState extends State<BuyScreen> {
                     padding: const EdgeInsets.only(top: 16),
                     itemCount: tradingCards.length,
                     itemBuilder: (context, index) {
+                      if (tradingCards[index] is Container) {
+                        return tradingCards[index];
+                      }
                       return TradingCardWidget(card: tradingCards[index]);
                     },
                   ),
